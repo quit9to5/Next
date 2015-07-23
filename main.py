@@ -4,7 +4,7 @@ import json
 import time
 
 SCOPE = ["https://spreadsheets.google.com/feeds"]
-SECRETS_FILE = "/tmp/a.json"
+SECRETS_FILE = "./a.json"
 SPREADSHEET = "Patient Management (Responses)"
 
 json_key = json.load(open(SECRETS_FILE))
@@ -16,8 +16,8 @@ print("The following sheets are available")
 for sheet in gc.openall():
     print("{} - {}".format(sheet.title, sheet.id))
 
+workbook = gc.open(SPREADSHEET)
 while True:
-	workbook = gc.open(SPREADSHEET)
 	# Get the first sheet
 	sheet = workbook.sheet1
 	print sheet.get_all_records()
