@@ -1,10 +1,24 @@
-#!/usr/bin/python
-from gdata.spreadsheet.service import SpreadsheetsService
+import gspread
+from oauth2client.client import SignedJwtAssertionCredentials
+import json
+import time
 
-key = '0Aip8Kl9b7wdidFBzRGpEZkhoUlVPaEg2X0F2YWtwYkE'
+SCOPE = ["https://spreadsheets.google.com/feeds"]
+SECRETS_FILE = "/tmp/a.json"
+SPREADSHEET = "Patient Management (Responses)"
 
-client = SpreadsheetsService()
-feed = client.GetWorksheetsFeed(key, visibility='public', projection='basic')
+json_key = json.load(open(SECRETS_FILE))
+# Authenticate using the signed key
+credentials = SignedJwtAssertionCredentials(json_key['client_email'],
+                                            json_key['private_key'], SCOPE)
+gc = gspread.authorize(credentials)
+print("The following sheets are available")
+for sheet in gc.openall():
+    print("{} - {}".format(sheet.title, sheet.id))
 
-for sheet in feed.entry:
-  print sheet.title.text
+while True:
+	workbook = gc.open(SPREADSHEET)
+	# Get the first sheet
+	sheet = workbook.sheet1
+	print sheet.get_all_records()
+	time.sleep(0.1)
