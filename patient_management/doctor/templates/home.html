@@ -1,0 +1,46 @@
+{% extends "index.html"%}
+{% load crispy_forms_tags %}
+
+{% block text %}
+<div class="inner cover">
+    <h1 class="cover-heading">GetDoc helps you find doctors fast.</h1>
+</div>
+{% endblock %}
+{% block content %}
+<!--
+<div class='row'>
+    <div class='col-md-3'>
+    <form method='POST' action='' > {% csrf_token %}
+        {{form|crispy}}
+        <input class="btn btn-default" type='submit' value='Sign Up'>
+     </form>
+</div>
+</div>
+-->
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" aria-label="...">
+      <div class="input-group-btn">
+<!--        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select City<span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a href="#">Hyderabad</a></li>
+          <li><a href="#">Bangalore</a></li>
+        </ul>
+-->
+    <div class="btn-group">
+        <select id="company" class="btn form-control">
+          <option>Hyderabad</option>
+          <option>Bangalore</option>
+          <option>Pune</option>
+        </select> 
+    </div> 
+      <div class="btn-group">
+        <button type="button" id="btnSearch" class="btn btn-primary">Search       </button>
+       </div>
+      </div><!-- /btn-group -->
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+{% endblock %}
