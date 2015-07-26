@@ -1,1 +1,7 @@
-A Python script for google sheet processing
+1 A Python script for google sheet processing -- main.py
+2 website 
+    how to run 
+    ----------
+    cd patient_management
+    python manage.py runserver
+    open localhost:8000
