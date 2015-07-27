@@ -17,11 +17,11 @@
 </div>
 </div>
 -->
-
+<form action="{% url 'search' %}" method='POST'>{% csrf_token %}
 <div class="row">
   <div class="col-lg-6">
     <div class="input-group">
-      <input type="text" class="form-control" aria-label="...">
+      <input type="text" class="form-control" aria-label="..." name="home_search">
       <div class="input-group-btn">
 <!--        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select City<span class="caret"></span></button>
         <ul class="dropdown-menu dropdown-menu-right">
@@ -30,17 +30,18 @@
         </ul>
 -->
     <div class="btn-group">
-        <select id="company" class="btn form-control">
+        <select id="company" class="btn form-control" name="home_dropdown">
           <option>Hyderabad</option>
           <option>Bangalore</option>
           <option>Pune</option>
         </select> 
     </div> 
       <div class="btn-group">
-        <button type="button" id="btnSearch" class="btn btn-primary">Search       </button>
+        <button type="submit" id="btnSearch" class="btn btn-primary" name="home_btn">Search</button>
        </div>
       </div><!-- /btn-group -->
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
+</form>
 {% endblock %}

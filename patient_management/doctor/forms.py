@@ -11,6 +11,6 @@ class SignUpForm(forms.ModelForm):
 
 
 class areaForm(forms.Form):
-    message = forms.CharField()
+    messag = forms.CharField(required=False)
 
 
