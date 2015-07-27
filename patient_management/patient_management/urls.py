@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^doctor/', 'doctor.views.home', name='home'),
     url(r'^contact/', 'doctor.views.contact', name='contact'),
     url(r'^search', 'doctor.views.search', name='search'),
-    url(r'^home/', 'doctor.views.home', name='home'),
+    url(r'^', 'doctor.views.home', name='home'),
 ]
 
 if settings.DEBUG:
