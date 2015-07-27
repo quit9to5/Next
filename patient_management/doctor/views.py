@@ -27,22 +27,32 @@ def home(request):
 def landingPage(request):
     return render(request, "index.html", {})
 
+def about(request):
+    context = {"message": "This is about page"}
+    return render(request, "about.html", context)
+
+def login(request):
+    context = {"message": "This is login page"}
+    return render(request, "login.html", context)
+
+def doctor_login(request):
+    context = {"message": "This is doctor_login page"}
+    return render(request, "doctor_login.html", context)
+
+
 def contact(request):   
     form = ContactForm(request.POST or None)
-
-    context = {
-            "form": form
-            }
-    if form.is_valid():
-        print form.cleaned_data
-        form_email = form.cleaned_data.get('email')
-        form_full_name = form.cleaned_data.get('full_name')
-        form_message = form.cleaned_data.get('message')
-        subject = "Site contact form"
-        from_email = settings.EMAIL_HOST_USER
-        to_email = form_email
-        contact_message = """
-        %s: %s via %s
-        """%(form_full_name, form_message, from_email)
-        send_mail(subject, contact_message, from_email, [to_email], fail_silently=True)
+    context= {}
+    if request.method == 'POST':
+        #form_email = form.cleaned_data.get('email')
+        #form_full_name = form.cleaned_data.get('full_name')
+        #form_message = form.cleaned_data.get('message')
+        ##subject = "Site contact form"
+        #from_email = settings.EMAIL_HOST_USER
+        #to_email = form_email
+        #contact_message = """
+        #%s: %s via %s
+        #"""%(form_full_name, form_message, from_email)
+        #send_mail(subject, contact_message, from_email, [to_email], fail_silently=True)
+        context = {"message":"* Successfully submitted the message"}
     return render(request, "forms.html", context)

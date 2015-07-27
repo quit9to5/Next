@@ -24,6 +24,9 @@ urlpatterns = [
     url(r'^doctor/', 'doctor.views.home', name='home'),
     url(r'^contact', 'doctor.views.contact', name='contact'),
     url(r'^search', 'doctor.views.search', name='search'),
+    url(r'^about', 'doctor.views.about', name='about'),
+    url(r'^login', 'doctor.views.login', name='login'),
+    url(r'^doctor_login', 'doctor.views.doctor_login', name='doctor_ogin'),
     url(r'^', 'doctor.views.home', name='home'),
 ]
 
