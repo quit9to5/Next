@@ -21,8 +21,9 @@ def check_search(request):
         return render(request, "search.html", {})
 
 def home(request):
-    print request.POST
     context = {}
+    if request.user.username is not "":
+        context = {"full_name": request.user.username}
     check_search(request)
     return render(request, "home.html", context)
 
