@@ -30,8 +30,11 @@ def home(request):
 def landingPage(request):
     return render(request, "index.html", {})
 
-def about(request):
-    context = {"message": "This is about page"}
+def about(request): 
+    context = {}
+    if request.user.is_authenticated():
+        context = {"full_name": request.user.username}
+    context.update({"message": "This is about page"})
     return render(request, "about.html", context)
 
 def login(request):

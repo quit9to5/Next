@@ -27,11 +27,13 @@
                     <li>
                         <a href="/contact">Contact</a>
                     </li>
+                    {% if user.is_authenticated %}
                     {% if full_name %}
                     <li>
                     <a href="/doctor_logout">{{full_name}}'s logout</a>
 
                     </li>
+                    {% endif %}
                     {% endif %}
 
                 </ul>
