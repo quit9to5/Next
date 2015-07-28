@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
+from django.contrib import auth
+from django.core.context_processors import csrf
 from django.conf import settings
 from .forms import SignUpForm, ContactForm, areaForm
 # Create your views here.
@@ -36,10 +38,31 @@ def login(request):
     return render(request, "login.html", context)
 
 def doctor_login(request):
-    context = {"message": "This is doctor_login page"}
+    context = {}
+    context.update(csrf(request))
     return render(request, "doctor_login.html", context)
+def doctor_logout(request):
+    full_name = request.user.username
+    auth.logout(request)
+    # don't use full_name tag as we are using it in navbar
+    return render(request, "doctor_logout.html", {'name':full_name})
+def doctor_auth(request):
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username=username, password=password)
+    
+    if user is not None:
+        auth.login(request, user)
+        return HttpResponseRedirect('/doctor_loggedin')
+    else:
+        context = {"message":"Loging failed"}
+        return render(request, "doctor_login.html", context)
 
-
+    return render(request, "doctor_login.html")
+    
+def doctor_loggedin(request):
+    context = {'full_name': request.user.username, "message":"test"}
+    return render(request, "doctor_logged.html", context)
 def contact(request):   
     form = ContactForm(request.POST or None)
     context= {}

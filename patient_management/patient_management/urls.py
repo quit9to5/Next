@@ -26,7 +26,10 @@ urlpatterns = [
     url(r'^search', 'doctor.views.search', name='search'),
     url(r'^about', 'doctor.views.about', name='about'),
     url(r'^login', 'doctor.views.login', name='login'),
-    url(r'^doctor_login', 'doctor.views.doctor_login', name='doctor_ogin'),
+    url(r'^doctor_logout', 'doctor.views.doctor_logout', name='logout'),
+    url(r'^doctor_loggedin', 'doctor.views.doctor_loggedin', name='doctor_login'),
+    url(r'^doctor_login', 'doctor.views.doctor_login', name='doctor_login'),
+    url(r'^auth/', 'doctor.views.doctor_auth', name='doctor_auth'),
     url(r'^', 'doctor.views.home', name='home'),
 ]
 
