@@ -22,7 +22,7 @@ def check_search(request):
 
 def home(request):
     context = {}
-    if request.user.username is not "":
+    if request.user.is_authenticated():
         context = {"full_name": request.user.username}
     check_search(request)
     return render(request, "home.html", context)
@@ -39,6 +39,8 @@ def login(request):
     return render(request, "login.html", context)
 
 def doctor_login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/doctor_loggedin')
     context = {}
     context.update(csrf(request))
     return render(request, "doctor_login.html", context)
@@ -62,11 +64,15 @@ def doctor_auth(request):
     return render(request, "doctor_login.html")
     
 def doctor_loggedin(request):
+    print "I got called"
     context = {'full_name': request.user.username, "message":"test"}
     return render(request, "doctor_logged.html", context)
 def contact(request):   
     form = ContactForm(request.POST or None)
-    context= {}
+    context= {} 
+    if request.user.is_authenticated():
+        context = {"full_name": request.user.username}
+
     if request.method == 'POST':
         #form_email = form.cleaned_data.get('email')
         #form_full_name = form.cleaned_data.get('full_name')
@@ -78,5 +84,5 @@ def contact(request):
         #%s: %s via %s
         #"""%(form_full_name, form_message, from_email)
         #send_mail(subject, contact_message, from_email, [to_email], fail_silently=True)
-        context = {"message":"* Successfully submitted the message"}
+        context.update({"message":"* Successfully submitted the message"})
     return render(request, "forms.html", context)
